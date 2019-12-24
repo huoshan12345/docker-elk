@@ -2,7 +2,7 @@ version: '3.2'
 
 services:
   elasticsearch:
-    restart: always  
+    restart: always    
     build:
       context: elasticsearch/
       args:
@@ -28,7 +28,7 @@ services:
       - elk
 
   logstash:
-    restart: always  
+    restart: always    
     build:
       context: logstash/
       args:
@@ -44,17 +44,17 @@ services:
         read_only: true
     ports:
       - "5000:5000"
-      - "9081:9081"      
+#      - "9081:9081/udp"    
       - "9600:9600"
     environment:
-      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      LS_JAVA_OPTS: "-Xmx768m -Xms768m"
     networks:
       - elk
     depends_on:
       - elasticsearch
 
   kibana:
-    restart: always  
+    restart: always    
     build:
       context: kibana/
       args:
